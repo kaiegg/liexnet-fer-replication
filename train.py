@@ -89,7 +89,9 @@ def main():
     model = LiExNet(num_classes=num_classes).to(device)
     criterion = nn.CrossEntropyLoss()
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
-    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10, verbose=True)
+    # scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10, verbose=True)
+    # NEW (Compatible with PyTorch 2.2+)
+    scheduler = ReduceLROnPlateau(optimizer, mode='min', factor=0.5, patience=10)
 
     best_val_acc = 0.0
     best_weights_path = os.path.join(args.weights_dir, "best_liexnet.pth")
