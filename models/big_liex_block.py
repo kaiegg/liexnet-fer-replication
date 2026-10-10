@@ -18,8 +18,8 @@ class LiExBlock(nn.Module):
         # Sublayer 3: ECA Module
         self.eca = ECAModule(channels=out_channels)
 
-        # Sublayer 4: Pointwise 1x1 Conv -> MaxPool2D
-        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=1, bias=False)
+        # Sublayer 4: Conv2D -> MaxPool2D
+        self.conv2 = nn.Conv2d(out_channels, out_channels, kernel_size=3, padding=1, bias=False)
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
